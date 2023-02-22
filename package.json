@@ -1,0 +1,38 @@
+{
+  "name": "2023-icodethis-weather-app",
+  "version": "1.0.0",
+  "description": "My implementation of the iCodeThis Weather App challenge.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dgdev1024/2023-icodethis-weather-app.git"
+  },
+  "keywords": [
+    "icodethis",
+    "weather",
+    "app"
+  ],
+  "author": "Dennis Griffin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dgdev1024/2023-icodethis-weather-app/issues"
+  },
+  "homepage": "https://github.com/dgdev1024/2023-icodethis-weather-app#readme",
+  "dependencies": {
+    "next": "^13.1.6",
+    "openweathermap-ts": "^1.2.10",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "18.14.0",
+    "@types/react": "18.0.28",
+    "typescript": "4.9.5"
+  }
+}
