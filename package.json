@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/dgdev1024/2023-icodethis-weather-app#readme",
   "dependencies": {
+    "@next/font": "^13.1.6",
     "next": "^13.1.6",
     "openweathermap-ts": "^1.2.10",
     "react": "^18.2.0",

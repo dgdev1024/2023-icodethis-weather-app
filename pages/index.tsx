@@ -2,22 +2,27 @@
  * @file pages / index.tsx
  */
 
-import { useEffect } from "react";
-import { useWeatherContext } from "../context/weather";
+import { useEffect } from 'react';
+import { resolveCoordinate } from '../lib/location';
 
 const HomePage = () => {
-  const weather = useWeatherContext();
+  useEffect(() => {
+    const test = async () => {
+      // const data = await resolveCoordinate(42.1841372, -86.275828);
+      // console.log(data);
 
-  const test = async () => {
-    await weather.addCoordinate(44.34, 10.99);
-  };
+      // const res = await fetch(`/api/location/coordinates?lat=${42.1841372}&lon=${-86.275828}`);
+      // const res = await fetch(`/api/location/zip?zip=49098`);
+      const res = await fetch(`/api/location/city?city=Watervliet`);
+      const data = await res.json();
 
-  return (
-    <>
-      <h1>Welcome To Next.JS!</h1>
-      <button onClick={test}>Clicky!</button>
-    </>
-  );
+      console.log(data);
+    };
+
+    test();
+  }, []);
+
+  return <></>
 };
 
 export default HomePage;
