@@ -8,7 +8,7 @@ import {
   resolveZip 
 } from "../../../lib/location";
 
-export type LocationZipGetQuery = {
+export type LocationZipPostBody = {
   zip: string;
   country: string;
 };
@@ -17,9 +17,13 @@ const Handler = async (
   req: NextApiRequest,
   res: NextApiResponse<ResolveZipReturn>
 ) => {
-  const query = req.query as LocationZipGetQuery;
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: "This method is not allowed." });
+  }
+
+  const body = req.body as LocationZipPostBody;
   const resolved = await resolveZip(
-    parseInt(query.zip), query.country || 'US'
+    body.zip, body.country || 'US'
   );
 
   if (resolved.error) { 

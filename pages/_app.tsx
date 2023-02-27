@@ -4,6 +4,8 @@
 
 import type { AppProps } from "next/app"
 import { Open_Sans } from '@next/font/google';
+import LocationProvider from "../context/location";
+import "../style.css";
 
 const openSans = Open_Sans({
   weight: [ '400', '600', '700' ],
@@ -12,9 +14,11 @@ const openSans = Open_Sans({
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (
-    <main className={openSans.className}>
-      <Component {...pageProps} />
-    </main>
+    <LocationProvider>
+      <main className={openSans.className}>
+        <Component {...pageProps} />
+      </main>
+    </LocationProvider>
   )
 };
 

@@ -8,7 +8,7 @@ import {
   resolveCity 
 } from "../../../lib/location";
 
-export type LocationCityGetQuery = {
+export type LocationCityPostBody = {
   city: string;
   state?: string;
   country: string;
@@ -18,9 +18,13 @@ const Handler = async (
   req: NextApiRequest,
   res: NextApiResponse<ResolveCoordinateReturn>
 ) => {
-  const query = req.query as LocationCityGetQuery;
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: "This method is not allowed." });
+  }
+
+  const body = req.body as LocationCityPostBody;
   const resolved = await resolveCity(
-    query.city, query.country, query?.state || undefined
+    body.city, body.country, body?.state || undefined
   );
 
   if (resolved.error) { 

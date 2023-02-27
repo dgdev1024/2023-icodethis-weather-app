@@ -8,18 +8,22 @@ import {
   resolveCoordinate 
 } from "../../../lib/location";
 
-export type LocationCoordinateGetQuery = {
-  lat: string;
-  lon: string;
+export type LocationCoordinatePostBody = {
+  lat: number;
+  lon: number;
 };
 
 const Handler = async (
   req: NextApiRequest,
   res: NextApiResponse<ResolveCoordinateReturn>
 ) => {
-  const query = req.query as LocationCoordinateGetQuery;
+  if (req.method != 'POST') {
+    return res.status(405).json({ error: "This method is not allowed." });
+  }
+
+  const body = req.body as LocationCoordinatePostBody;
   const resolved = await resolveCoordinate(
-    parseFloat(query.lat), parseFloat(query.lon)
+    body.lat, body.lon
   );
 
   if (resolved.error) { 

@@ -70,7 +70,7 @@ export const resolveCity = async (
 }
 
 export const resolveZip = async (
-  zip: number,
+  zip: string,
   countryCode: string
 ) : Promise<ResolveZipReturn> => {
   const res = await fetch(`${zipEndpoint}&zip=${zip},${countryCode}`);
