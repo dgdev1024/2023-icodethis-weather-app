@@ -4,10 +4,16 @@
 
 import { useEffect, useState } from "react";
 import { useLocationContext } from "../context/location";
-import { ResolvedLocation } from "../lib/location";
-import Styles from './location-select.module.css';
+import { MeasureUnits } from "../lib/weather";
+import Styles from "./location-select.module.css";
 
-const LocationSelect = () => {
+export type LocationSelectProps = {
+  setMeasureUnits: (
+    value: MeasureUnits | ((val: MeasureUnits) => MeasureUnits)
+  ) => void;
+};
+
+const LocationSelect = (props: LocationSelectProps) => {
   const location = useLocationContext();
   const [shown, setShown] = useState<boolean>(false);
   const [formattedLocations, setFormattedLocations] = useState<string[]>([]);
@@ -29,7 +35,7 @@ const LocationSelect = () => {
   const onLocationEntryClicked = (index: number) => {
     location.setCurrentLocationIndex(index);
     setShown(false);
-  }
+  };
 
   const onLocationEntryDeleteClicked = (index: number) => {
     location.removeLocationIndex(index);
@@ -37,34 +43,33 @@ const LocationSelect = () => {
     if (index < location.currentLocationIndex) {
       location.setCurrentLocationIndex(location.currentLocationIndex - 1);
     }
-  }
+  };
 
   return (
-    <div className={`
+    <div
+      className={`
       ${Styles.locationSelect}
       ${shown && Styles.locationSelectShown}
-    `}>
+    `}
+    >
       <button
         className={Styles.locationSelectRevealButton}
-        onClick={() => setShown(s => !s)}
+        onClick={() => setShown((s) => !s)}
       >
-        {
-          formattedLocations.length === 0 ? (
-            ""
-          ) : (
-            formattedLocations[location.currentLocationIndex]
-          )
-        }
+        {formattedLocations.length === 0
+          ? ""
+          : formattedLocations[location.currentLocationIndex]}
       </button>
       <div className={Styles.locationSelectContainer}>
-      {
-        formattedLocations.map((formattedLocation, index) => (
+        {formattedLocations.map((formattedLocation, index) => (
           <div className={Styles.locationSelectEntry} key={index}>
-            <button 
+            <button
               className={Styles.locationSelectEntryButton}
               onClick={() => onLocationEntryClicked(index)}
               disabled={shown === false}
-            >{formattedLocation}</button>
+            >
+              {formattedLocation}
+            </button>
             <button
               className={`
                 ${Styles.locationSelectEntryButton}
@@ -72,10 +77,31 @@ const LocationSelect = () => {
               `}
               onClick={() => onLocationEntryDeleteClicked(index)}
               disabled={shown === false}
-            >&times;</button>
+            >
+              &times;
+            </button>
           </div>
-        ))
-      }
+        ))}
+      </div>
+      <div className={Styles.unitSelect}>
+        <button
+          className={Styles.unitSelectButton}
+          onClick={() => props.setMeasureUnits("standard")}
+        >
+          Use Standard Units
+        </button>
+        <button
+          className={Styles.unitSelectButton}
+          onClick={() => props.setMeasureUnits("metric")}
+        >
+          Use Metric Units
+        </button>
+        <button
+          className={Styles.unitSelectButton}
+          onClick={() => props.setMeasureUnits("imperial")}
+        >
+          Use Imperial Units
+        </button>
       </div>
     </div>
   );

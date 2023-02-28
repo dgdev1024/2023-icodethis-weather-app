@@ -32,7 +32,7 @@ const Container = () => {
           units={measureUnits}
         />
       </div>
-      <LocationSelect />
+      <LocationSelect setMeasureUnits={setMeasureUnits} />
       <AddLocation />
     </>
   );

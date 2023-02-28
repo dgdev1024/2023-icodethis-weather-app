@@ -92,7 +92,7 @@
   flex-direction: column;
   gap: 8px;
   width: 100%;
-  height: 90vh;
+  height: 80vh;
   padding: 16px;
 }
 
@@ -133,6 +133,36 @@
 
 .locationSelectEntryDeleteButton:hover {
   color: red;
+}
+
+.unitSelect {
+  --background-color: hsla(0, 0%, 0%, 0.75);
+  --background-color-hover: hsla(0, 0%, 0%, 0.9);
+  --text-color: #f4f4f6;
+  --text-color-hover: #ffffff;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  height: 10vh;
+}
+
+.unitSelectButton {
+  padding: 12px 0px;
+  font-size: 1rem;
+  text-align: center;
+  text-transform: uppercase;
+  line-height: 1.25rem;
+  color: var(--text-color);
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition-property: background-color, color;
+  transition-duration: 0.25s;
+}
+
+.unitSelectButton:hover {
+  color: var(--text-color-hover);
+  background-color: var(--background-color-hover);
 }
 
 @media (min-width: 600px) {
