@@ -87,18 +87,24 @@ const LocationSelect = (props: LocationSelectProps) => {
         <button
           className={Styles.unitSelectButton}
           onClick={() => props.setMeasureUnits("standard")}
+          disabled={shown === false}
+          aria-label="Use standard measuring units (Kelvin for temperature, meters per second for wind)."
         >
           Standard
         </button>
         <button
           className={Styles.unitSelectButton}
           onClick={() => props.setMeasureUnits("metric")}
+          disabled={shown === false}
+          aria-label="Use standard measuring units (Degrees Celcius for temperature, meters per second for wind)."
         >
           Metric
         </button>
         <button
           className={Styles.unitSelectButton}
           onClick={() => props.setMeasureUnits("imperial")}
+          disabled={shown === false}
+          aria-label="Use standard measuring units (Degrees Farenheit for temperature, miles per hour for wind)."
         >
           Imperial
         </button>
