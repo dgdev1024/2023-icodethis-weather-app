@@ -88,19 +88,19 @@ const LocationSelect = (props: LocationSelectProps) => {
           className={Styles.unitSelectButton}
           onClick={() => props.setMeasureUnits("standard")}
         >
-          Use Standard Units
+          Standard
         </button>
         <button
           className={Styles.unitSelectButton}
           onClick={() => props.setMeasureUnits("metric")}
         >
-          Use Metric Units
+          Metric
         </button>
         <button
           className={Styles.unitSelectButton}
           onClick={() => props.setMeasureUnits("imperial")}
         >
-          Use Imperial Units
+          Imperial
         </button>
       </div>
     </div>
