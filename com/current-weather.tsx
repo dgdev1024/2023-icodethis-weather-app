@@ -3,7 +3,7 @@
  */
 
 import { useEffect, useState } from "react";
-import { useStatus } from "../hooks/use-status";
+import { StatusEnum, useStatus } from "../hooks/use-status";
 import Styles from "./current-weather.module.css";
 import { MeasureUnits, Weather, ResolvedCurrentWeather } from "../lib/weather";
 
@@ -16,14 +16,22 @@ export type CurrentWeatherProps = {
 const CurrentWeather = (props: CurrentWeatherProps) => {
   const status = useStatus();
   const [currentPage, setCurrentPage] = useState<number>(0);
+  const [tick, setTick] = useState<number>(0);
   const [weather, setWeather] = useState<Weather>(null);
 
   const nextPage = () => setCurrentPage((page) => (page + 1) % 4);
+
+  const update = () => setTick((tick) => (tick + 1) % 100);
 
   useEffect(() => {
     const timeout = setTimeout(() => nextPage(), 15000);
     return () => clearTimeout(timeout);
   }, [currentPage]);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => update(), 60000 * 5);
+    return () => clearTimeout(timeout);
+  }, [tick]);
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -34,7 +42,9 @@ const CurrentWeather = (props: CurrentWeatherProps) => {
         return;
       }
 
-      status.setLoading("Fetching current weather...");
+      if (weather === null) {
+        status.setLoading("Fetching current weather...");
+      }
 
       try {
         const res = await fetch(
@@ -64,13 +74,18 @@ const CurrentWeather = (props: CurrentWeatherProps) => {
     return () => {
       abortController.abort();
     };
-  }, [props]);
+  }, [props, tick]);
 
-  if (!weather) {
+  if (!weather || status.status === StatusEnum.Error) {
     return (
       <div className={Styles.currentWeather}>
         <div className={Styles.currentWeatherContainer}>
-          <div className={Styles.currentWeatherPage}>
+          <div
+            className={`
+            ${Styles.currentWeatherPage}
+            ${Styles.currentConditions}
+          `}
+          >
             <p className={Styles.currentWeatherStatus}>{status.message}</p>
           </div>
         </div>

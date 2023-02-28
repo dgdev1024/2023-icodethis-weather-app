@@ -1,2 +1,237 @@
 .extendedForecast {
+  --background-color: hsl(222, 11%, 90%);
+  --button-color: hsl(222, 11%, 10%);
+  --button-color-hover: hsl(222, 11%, 50%);
+
+  width: 100%;
+  height: 100%;
+  background-color: var(--background-color);
+}
+
+.extendedForecastStatusContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.extendedForecastContainer {
+  position: relative;
+  width: 100%;
+  height: calc(100% - 10vh - 32px);
+  overflow: hidden;
+}
+
+.extendedForecastPage {
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  padding: 2px 16px;
+
+  transition-property: left;
+  transition-duration: 1s;
+}
+
+.extendedForecastEntryContainer {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  max-width: 600px;
+  margin: 0px auto;
+}
+
+.extendedForecastEntry {
+  display: grid;
+  grid-template-columns: 45% 1fr 64px 32px;
+  grid-template-areas: "time temp icon precip";
+  align-items: center;
+  gap: 4px;
+}
+
+.extendedForecastEntryTime {
+  grid-area: time;
+  justify-self: start;
+}
+
+.extendedForecastEntryIcon {
+  grid-area: icon;
+  justify-self: end;
+  width: 32px;
+  height: 32px;
+}
+
+.extendedForecastEntryTemp {
+  grid-area: temp;
+  font-weight: 700;
+}
+
+.extendedForecastEntryTempLabel,
+.extendedForecastEntryPrecipLabel {
+  display: none;
+  font-size: 0.75rem;
+  font-weight: 400;
+}
+
+.extendedForecastEntryPrecip {
+  grid-area: precip;
+  justify-self: end;
+}
+
+.extendedForecastButtonStrip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  width: 100%;
+  height: 32px;
+}
+
+.extendedForecastButton {
+  width: 16px;
+  height: 16px;
+  background-color: var(--button-color);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition-property: background-color;
+  transition-duration: 0.25s;
+}
+
+.extendedForecastButton:hover,
+.extendedForecastButtonActive {
+  background-color: var(--button-color-hover);
+}
+
+@media (min-width: 800px) {
+  .extendedForecastEntryContainer {
+    max-width: unset;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    column-gap: 16px;
+  }
+
+  .extendedForecastEntry {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-areas:
+      "time icon temp"
+      "time icon precip";
+  }
+
+  .extendedForecastEntryTime {
+    align-self: center;
+  }
+
+  .extendedForecastEntryIcon {
+    width: 64px;
+    height: 64px;
+  }
+
+  .extendedForecastEntryTemp {
+    align-self: end;
+    justify-self: end;
+  }
+
+  .extendedForecastEntryPrecip {
+    align-self: start;
+    justify-self: end;
+  }
+}
+
+@media (min-width: 1024px) {
+  .extendedForecastEntryContainer {
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(1, 1fr);
+    width: 90%;
+  }
+
+  .extendedForecastPage {
+    display: flex;
+    align-items: center;
+    justify-content: stretch;
+  }
+}
+
+@media (min-width: 1600px) {
+  .extendedForecastEntryTempLabel,
+  .extendedForecastEntryPrecipLabel {
+    display: block;
+  }
+
+  .extendedForecastEntryTemp {
+    align-self: center;
+    justify-self: end;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .extendedForecastEntryPrecip {
+    align-self: center;
+    justify-self: end;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+}
+
+@media (max-height: 599px) {
+  .extendedForecastEntryContainer {
+    max-width: unset;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    column-gap: 16px;
+  }
+
+  .extendedForecastEntry {
+    grid-template-columns: 45% 1fr 64px 32px;
+    grid-template-rows: 1fr;
+    grid-template-areas: "time temp icon precip";
+  }
+
+  .extendedForecastEntryTime {
+    align-self: center;
+  }
+
+  .extendedForecastEntryIcon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .extendedForecastEntryTemp {
+    align-self: center;
+    justify-self: end;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .extendedForecastEntryPrecip {
+    align-self: center;
+    justify-self: end;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+}
+
+@media (min-width: 1024px) and (max-height: 599px) {
+  .extendedForecastEntryContainer {
+    max-width: unset;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(1, 1fr);
+    column-gap: 16px;
+  }
+
+  .extendedForecastEntry {
+    grid-template-columns: 45% 1fr auto 32px;
+    grid-template-rows: 1fr;
+    grid-template-areas: "time temp icon precip";
+  }
 }

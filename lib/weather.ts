@@ -117,6 +117,27 @@ const toCardinalDirection = (degrees: number) => {
   }
 };
 
+export const getDay = (day: number) => {
+  switch (day) {
+    case 0:
+      return "Sun";
+    case 1:
+      return "Mon";
+    case 2:
+      return "Tue";
+    case 3:
+      return "Wed";
+    case 4:
+      return "Thu";
+    case 5:
+      return "Fri";
+    case 6:
+      return "Sat";
+    default:
+      return "";
+  }
+};
+
 export const fetchCurrentWeather = async (
   lat: number,
   lon: number,
@@ -132,7 +153,6 @@ export const fetchCurrentWeather = async (
   }
 
   const data = await res.json();
-  console.log(data);
 
   return {
     weather: {
@@ -189,7 +209,7 @@ export const fetchExtendedForecast = async (
       id: data.weather.id,
       name: data.weather.main,
       description: data.weather.description,
-      icon: `https://openweathermap.org/img/wn/${data.weather.icon}@2x`,
+      icon: `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`,
       chanceOfPrecip: data.pop,
     },
     temperature: {
@@ -211,7 +231,7 @@ export const fetchExtendedForecast = async (
     misc: {
       visibility: data.visibility,
       cloudCover: data.clouds.all,
-      time: new Date(data.dt),
+      time: new Date(data.dt * 1000),
     },
   }));
 

@@ -1,8 +1,8 @@
 .addLocation {
   --background-color: hsl(222, 11%, 57%);
   --background-color-hover: hsl(222, 11%, 70%);
-  --text-color: #F4F4F6;
-  --text-color-hover: #FFFFFF;
+  --text-color: #f4f4f6;
+  --text-color-hover: #ffffff;
 
   position: fixed;
   bottom: 0px;
@@ -65,7 +65,7 @@
 .addLocationButton {
   --background-color: hsl(222, 11%, 25%);
   --background-color-hover: hsl(222, 11%, 40%);
-  
+
   width: 100%;
   padding: 8px;
   font-size: 1.1rem;
@@ -125,5 +125,29 @@
   .addLocation {
     left: 50%;
     width: 50vw;
+  }
+}
+
+@media (max-height: 599px) {
+  .addLocationMenu {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+      "current city"
+      "zip city";
+    padding: 16px;
+  }
+
+  .useCurrentLocationButton {
+    grid-area: current;
+  }
+
+  .addZipCodeForm {
+    grid-area: zip;
+  }
+
+  .addCityForm {
+    grid-area: city;
   }
 }

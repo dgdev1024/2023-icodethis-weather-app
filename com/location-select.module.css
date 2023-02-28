@@ -1,8 +1,8 @@
 .locationSelect {
   --background-color: hsla(0, 0%, 0%, 0.75);
   --background-color-hover: hsla(0, 0%, 0%, 0.9);
-  --text-color: #F4F4F6;
-  --text-color-hover: #FFFFFF;
+  --text-color: #f4f4f6;
+  --text-color-hover: #ffffff;
 
   position: fixed;
   top: 0px;
@@ -41,7 +41,7 @@
 }
 
 .locationSelectRevealButton::before {
-  content: '';
+  content: "";
   position: absolute;
   top: calc(50% - 2px);
   right: 14px;
@@ -54,7 +54,7 @@
 }
 
 .locationSelectRevealButton::after {
-  content: '';
+  content: "";
   position: absolute;
   top: calc(50% - 2px);
   right: 24px;
@@ -151,7 +151,6 @@
     width: 50vw;
   }
 
-  
   .locationSelectRevealButton {
     padding-left: 16px;
     text-align: left;
@@ -163,12 +162,7 @@
 }
 
 @media (min-width: 1200px) {
-  .locationSelectRevealButton {
-    padding-left: 8px;
-    text-align: center;
-  }
-
-  .locationSelectEntryButton {
+  .locationSelectEntryDeleteButton {
     text-align: center;
   }
 }
